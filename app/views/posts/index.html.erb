@@ -1,0 +1,14 @@
+<h1 style= "text-align: center">Posts</h1>
+<% if @posts %>
+  <% @posts.each do |post| %>
+<div style="background-color:#04AA6D;color:white;padding:30px;width:70%;margin: 0 auto ">
+    <h5>
+    <%= post.title %><% if post.public_flag == true %> &nbsp;<i class="icon-flag"></i><% end %>
+    </h5>
+    <p><%= truncate(post.description.html_safe, length:200)%></p>
+</div>
+</br>
+  <% end %>
+<% else %>
+  <p> No Post to show.</p>
+<% end %>

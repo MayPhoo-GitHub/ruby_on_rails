@@ -1,0 +1,31 @@
+<%= stylesheet_link_tag "table.css" %>
+<table id="users">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone No</th>
+            <th>Address</th>
+            <th>Birthday</th>
+            <th>User Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @users.each_with_index  do |user, index| %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.phone %></td>
+                <td><%= user.address %></td>
+                <td><%= user.birthday %></td>
+                <td><%= user.super_user_flag == true ? "Super User" : "Normal User" %></td>
+                <td><%= link_to "Show", user_path(user.id) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%= link_to "Add User", new_user_users_path, class: "btn-submit" %>
