@@ -1,14 +1,17 @@
+<%= stylesheet_link_tag "post.css" %>
 <h1 style= "text-align: center">Posts</h1>
+<%= link_to "Create Post", new_post_path, class: "button" %>
 <% if @posts %>
   <% @posts.each do |post| %>
-<div style="background-color:#04AA6D;color:white;padding:30px;width:70%;margin: 0 auto ">
+    <div style="background-color:#04AA6D;color:white;padding:30px;width:70%;margin: 0 auto ">
     <h5>
     <%= post.title %><% if post.public_flag == true %> &nbsp;<i class="icon-flag"></i><% end %>
     </h5>
-    <p><%= truncate(post.description.html_safe, length:200)%></p>
-</div>
+    <p><%= truncate(post.description.html_safe, length:250)%></p>
+    <%= link_to "Show More >>", post_path(post), class: "show-more" %>
+    </div>
 </br>
-  <% end %>
+<% end %>
 <% else %>
   <p> No Post to show.</p>
 <% end %>

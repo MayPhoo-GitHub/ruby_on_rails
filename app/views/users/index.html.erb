@@ -30,4 +30,8 @@
 <% if current_user.super_user_flag %>
 <%= link_to "Add User", new_user_users_path, class: "btn-submit" %>
 <% end %>
-
+<script>
+$(document).ready(function() {
+    var userTable=$("#users").DataTable({})
+});
+</script>

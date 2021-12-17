@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   root 'login#login'
+ # posts
+  resources :posts do
+      get :new_post, to: "posts#new"
+      post :new_post
+     
+    end
 
-  # post
-  get '/posts', to: 'posts#index'
-
+ # users
   resources :users do
     collection do
 

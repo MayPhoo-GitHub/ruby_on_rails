@@ -66,6 +66,15 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  # function :profile
+  # show profile
+  # @return [<Type>] <current user>
+  #
+  def profile
+    @user = current_user
+  end
+
+
   private
   # set user parameters
   # @return [<Type>] <description>
