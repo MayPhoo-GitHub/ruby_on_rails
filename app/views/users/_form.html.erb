@@ -62,10 +62,8 @@
     <div class="error-msg">User Type <%= user.errors[:super_user_flag][0] %></div>
   <% end %>
   </div>
-  
-  <div class="submit-btn-div">
     <%= form.submit class: "btn-submit" %>
-    <%= link_to 'Back to list', back  %>
-  </div>
+    <%= link_to 'Cancel', back  %>
+
   </div>
 <% end %>

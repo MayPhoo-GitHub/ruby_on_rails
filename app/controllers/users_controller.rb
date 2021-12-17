@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authorized?
   def index
     @users = UserService.getAllUsers
   end
@@ -30,22 +31,12 @@ class UsersController < ApplicationController
     @user = UserService.getUserByID(params[:id])
   end
   
-  private
-  # set user parameters
-  # @return [<Type>] <description>
-  def user_params
-    params.require(:user).permit(:id, :name, :email, :password,:password_confirmation,
-    :phone, :address, :birthday, :super_user_flag)
-  end
-
   
   # function :edit
   # show edit user
   # @return [<Type>] <edit user>
   #
   def edit
-    add_breadcrumb "User Detail", :user_path
-    add_breadcrumb "Edit User", :edit_user_path
     @user = UserService.getUserByID(params[:id])
   end
 
@@ -72,5 +63,15 @@ class UsersController < ApplicationController
   def destroy
     @user = UserService.getUserByID(params[:id])
     UserService.destroyUser(@user)
+    redirect_to users_path
   end
+
+  private
+  # set user parameters
+  # @return [<Type>] <description>
+  def user_params
+    params.require(:user).permit(:id, :name, :email, :password,:password_confirmation,
+    :phone, :address, :birthday, :super_user_flag)
+  end
+
 end

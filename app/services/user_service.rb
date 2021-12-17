@@ -37,5 +37,14 @@ class UserService
         def destroyUser(user)
             UserRepository.destroyUser(user)
         end
+        
+         # function :findByEmail
+        # find user by email
+        # @param [<Type>] email <description>
+        # @return [<Type>] <user>
+        def findByEmail(email)
+            @user = UserRepository.findByEmail(email)
+        end
+
     end
 end
