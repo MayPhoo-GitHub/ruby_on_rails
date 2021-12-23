@@ -1,28 +1,25 @@
+<%= stylesheet_link_tag "form.css" %>
 <div class="pt-5">
 <h1 class="text-center">Log In</h1>
   <div class="row">
     <div class = "card col-md-5 mx-auto">
-      <div class="card-body">
-      
-      <%= notice %>
-
+      <div class="card-body">      
+        <%if notice %>
+          <div class="error-msg"> <%= notice %> </div>
+        <% end %>
         <%= form_with(url: login_path, scope: :session, local: true) do |form| %>
           <div class="form-group">
-            <%= form.label :email, class: "required" %>
-            <%= form.email_field :email, class: 'form-control' %>
+              <%= form.label :email, class: "required" %>
+              <%= form.email_field :email, class: 'form-control' %>
           </div>
           <div class="form-group">
-            <%= form.label :password, class: "d-flex flex-row align-items-center required" %>
+            <%= form.label :password , class: "required" %>
             <%= form.password_field :password, class: 'form-control' %>
-            <a class="ml-auto border-link small-xl" href="#">Forget password?</a>
+            <p><%= link_to 'Forgot password?', password_reset_path %></p>
           </div>
           <div class="form-group pt-1">
             <button class="btn btn-dark btn-block" type="submit">Log In</button>
           </div>
-          <p class="small-xl pt-3 text-center">
-            <span class="text-muted">New to BulletinBoard?</span>
-            <%= link_to "Sign Up", new_user_users_path %>
-          </p>
         <% end %>
       </div>
     </div>

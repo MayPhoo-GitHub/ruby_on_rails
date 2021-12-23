@@ -1,17 +1,44 @@
 <%= stylesheet_link_tag "post.css" %>
+
 <h1 style= "text-align: center">Posts</h1>
-<%= link_to "Create Post", new_post_path, class: "button" %>
-<% if @posts %>
-  <% @posts.each do |post| %>
-    <div style="background-color:#04AA6D;color:white;padding:30px;width:70%;margin: 0 auto ">
-    <h5>
-    <%= post.title %><% if post.public_flag == true %> &nbsp;<i class="icon-flag"></i><% end %>
-    </h5>
-    <p><%= truncate(post.description.html_safe, length:250)%></p>
-    <%= link_to "Show More >>", post_path(post), class: "show-more" %>
+<div class="top">
+  <%= form_with class: "search", url: search_posts_path, method: :get do |form| %>
+    <div class="post-search">
+      <%= form.text_field :search_keyword, class: "form-control",placeholder: "search post", value: @last_search_keyword %>
     </div>
-</br>
-<% end %>
+  <% end %>
+  <ul class="navbar-nav my-sm-0">
+    <li class="nav-item">
+      <div class="dropdown show">
+        <a class="nav-link dropdown-toggle" role="button" 
+        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Filter By
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <%= link_to "All Post", posts_path , class:"dropdown-item" %>
+          <%= link_to "Own Post", filter_posts_path , class:"dropdown-item" %>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <%= link_to "Upload", new_post_posts_path, class: "button" %>
+</div>
+<% if  @posts.empty?  %>
+  <p style= "text-align:center"> No Post to show.</p>
 <% else %>
-  <p> No Post to show.</p>
+  <% @posts.each do |post| %>
+    <h2 class="header"><%= post.title %>
+    <% if post.public_flag == true %>&nbsp;<i class="fa fa-globe" style="font-size:24px;"></i> 
+    <% else %>
+      &nbsp; <i class="fa fa-lock" style="font-size:24px;"></i> 
+     <% end %>
+     <p style="font-size:12px"><%= post.created_at.strftime("%Y/%m/%d " )%></p>
+     </h2>
+    <div class="content"><%= truncate(post.description.html_safe, length:50)%><br>
+      <%= link_to "Show More >>", post_path(post), class: "show-more" %>
+    </div> </br>
+  <% end %>
 <% end %>
+<div class="wrapper">
+  <%= will_paginate @posts, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+</div>

@@ -33,4 +33,10 @@
     cursor: pointer;
     text-decoration: none;
   }
-  
+  .table-container {
+    background-color: #f2f2f2;
+    width: 90%;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 0 auto;
+  }

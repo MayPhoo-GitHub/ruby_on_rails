@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
         redirect_to login_path unless logged_in?
     end
 
+    
+    def can_edit(post)
+        return current_user.super_user_flag || (post.created_user_id == current_user.id)
+    end
 
-    helper_method :current_user, :logged_in?, :can_create, :can_edit
+    helper_method :current_user, :logged_in?,  :can_edit
+
 end

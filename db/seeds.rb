@@ -12,7 +12,7 @@ User.create!([
     {
         name: "Admin",
         email: "admin@gmail.com",
-        password: "admin",
+        password: "admin123",
         phone: '09401245003',
         address: " Yangon",
         birthday: '1998-09-03',
@@ -21,7 +21,7 @@ User.create!([
     {
         name: "User",
         email: "user@gmail.com",
-        password: "user",
+        password: "user1234",
         phone: '09401245003',
         address: " Yangon",
         birthday: '1998-09-03',
