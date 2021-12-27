@@ -1,22 +1,33 @@
-.button {
-    background-color: #3b76b1;
+.button , .btn-download {
+    
     border-radius: 10% ;
     border: none;
     color: white;
-    padding: 15px;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
     cursor: pointer;
-    position: absolute;
-    right: 15%;
+    position: absolute; 
     top:   16%;
-
+  }
+  .button {
+    background-color: #3b76b1;
+    padding: 8px;
+    right: 15%;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     box-shadow: 0 8px 16px 0 rgba(36, 23, 153, 0.2), 0 6px 20px 0 rgba(59, 50, 184, 0.19);
-  }
 
+  }
+  .btn-download {
+    background-color: #17aa66;
+    padding: 15px;
+    right: 25%;
+
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(13, 121, 115, 0.2), 0 6px 20px 0 rgba(57, 132, 134, 0.19);
+  }
   .show-more {
     color: #b92d39;
     font-size: 12px;

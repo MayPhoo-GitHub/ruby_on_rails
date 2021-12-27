@@ -84,6 +84,61 @@ class PostsController < ApplicationController
     @posts = PostService.filter(@user_id).paginate(page: params[:page], per_page: 5)
     render :index
   end
+
+  # function download_csv
+  # download post csv
+  #
+  # @return [<Type>] <csv>
+  def download_csv
+    @posts = PostService.getAllPosts(current_user)
+    @posts = @posts.reorder('id ASC')
+    respond_to do |format|
+      format.html
+      format.csv { send_data @posts.to_csv,:filename => "Posts-#{Date.today}.csv" }
+    end
+  end
+
+  # function csv_format
+  # download csv format for upload
+  # @return [<Type>] <description>
+  def csv_format
+    @post = Post.new
+    respond_to do |format|
+      format.html
+      format.csv { send_data @post.csv_format,  :filename => "CSV Format.csv" }
+    end
+  end
+
+  # functin upload_csv
+  # show csv upload page
+  # @return [<Type>] <description>
+  def upload_csv
+    :csv_format_posts_path
+  end
+
+  # function import_csv
+  # create posts by csv
+  # @return [<Type>] <redirect>
+  def import_csv
+    if (params[:file].nil?)
+      redirect_to upload_csv_posts_path, notice: :CSV_FILE_IS_REQUIRED
+    elsif !File.extname(params[:file]).eql?(".csv")
+      redirect_to upload_csv_posts_path, notice: :WRONG_FILE_TYPE
+    else
+      error =  PostsHelper.check_header(Constants::POST_CSV_FORMAT_HEADER,params[:file])
+      if error.present?
+        redirect_to upload_csv_posts_path, notice: error
+      else
+          file_result = Post.import(params[:file], current_user.id)
+          if (file_result == true)
+            redirect_to posts_path, notice: :FILE_UPLOADED_SUCCESSFULLY
+          else 
+            redirect_to upload_csv_posts_path, notice: file_result
+          end
+      end
+    end
+  end
+
   private
   # set post parameters
   # @return [<Type>] <description>

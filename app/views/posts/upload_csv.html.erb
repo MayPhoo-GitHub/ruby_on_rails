@@ -1,0 +1,12 @@
+<div class="container">
+  <h3>Upload CSV File</h3><br>
+  <%= form_tag import_csv_posts_path, multipart: true do |form| %>
+    <div class="field form-group row">
+      <div class="col-sm-6"><%= file_field_tag :file, accept: 'text/csv', class: "form-control" %> </div>
+    </div>
+    <%if notice %>
+      <div class="error-msg"> <%= notice %> </div>
+    <% end %>
+      <%= submit_tag "Upload", class: 'btn-submit' %>
+  <% end %>
+</div>

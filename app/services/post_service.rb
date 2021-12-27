@@ -53,5 +53,6 @@ class PostService
     def filter(user_id)
         @posts = PostRepository.filter(user_id)
     end
+
   end
 end
