@@ -16,15 +16,6 @@ class Post < ApplicationRecord
       end
     end
 
-    # function csv_format
-    # export csv format for post csv upload
-    # @return [<Type>] <csv>
-    def csv_format
-      headers = Constants::POST_CSV_FORMAT_HEADER
-      CSV.generate(headers:true) do |csv|
-        csv << headers
-      end
-    end
 
     # function import
     # import post csv
