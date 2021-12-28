@@ -6,6 +6,7 @@ class UserService
     def getAllUsers
       @users = UserRepository.getAllUsers
     end
+
     # function :createUser
     # create user
     # @param [<Type>] user <description>
@@ -13,6 +14,7 @@ class UserService
     def createUser(user)
       @is_user_create = UserRepository.createUser(user)
     end
+
     # function getUserByID
     # select user by user id
     # @param [<Type>] id <description>
@@ -29,7 +31,7 @@ class UserService
     def updateUser(user, user_params)
       @is_user_update = UserRepository.updateUser(user, user_params)
     end
-     
+
     # function :destroyUser
     # delete user
     # @param [<Type>] user <description>
@@ -37,7 +39,7 @@ class UserService
     def destroyUser(user)
       UserRepository.destroyUser(user)
     end
-     
+
     # function :findByEmail
     # find user by email
     # @param [<Type>] email <description>
@@ -45,6 +47,7 @@ class UserService
     def findByEmail(email)
       @user = UserRepository.findByEmail(email)
     end
+
     # function :updateProfile
     # update profile
     # @param [<Type>] user <description>
