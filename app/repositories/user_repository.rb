@@ -15,7 +15,6 @@ class UserRepository
       @is_user_create = user.save
     end
 
-
     # function :getUserByID
     # select user by user_id
     # @param [<Type>] id <description>

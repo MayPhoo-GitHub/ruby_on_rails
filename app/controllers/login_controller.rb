@@ -43,5 +43,4 @@ class LoginController < ApplicationController
     @current_user = nil
     redirect_to posts_path
   end
-
 end

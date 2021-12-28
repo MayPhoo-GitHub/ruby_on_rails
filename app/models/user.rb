@@ -9,8 +9,7 @@ class User < ApplicationRecord
   validates_inclusion_of :super_user_flag, :in => [true, false]
   has_secure_password
     
-  private
- 
+  private 
   def email_downcase
     self.email = email.downcase
   end

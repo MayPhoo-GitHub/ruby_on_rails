@@ -16,7 +16,6 @@ class Post < ApplicationRecord
       end
     end
 
-
     # function import
     # import post csv
     # @param [<Type>] file <description>
@@ -25,7 +24,8 @@ class Post < ApplicationRecord
     def self.import(file,current_user_id)
       begin
         CSV.foreach(file.path, headers: true, encoding:'iso-8859-1:utf-8', row_sep: :auto, header_converters: :symbol) do |row|
-          Post.create! row.to_hash.merge(created_user_id: current_user_id, updated_user_id: current_user_id, created_at: Time.now, updated_at: Time.now)
+          Post.create! row.to_hash.merge(created_user_id: current_user_id, 
+          updated_user_id: current_user_id, created_at: Time.now, updated_at: Time.now)
         end
         return true
       rescue => exception

@@ -31,25 +31,20 @@ class UsersController < ApplicationController
   # function :show
   # show user detail
   # @return [<Type>] <user>
-  #
   def show
     @user = UserService.getUserByID(params[:id])
-  end
-  
+  end  
   
   # function :edit
   # show edit user
   # @return [<Type>] <edit user>
-  #
   def edit
     @user = UserService.getUserByID(params[:id])
   end
 
-  #
   # function :update
   # update user
   # @return [<Type>] <redirect>
-  #
   def update
     @user = UserService.getUserByID(params[:id])
     @is_user_update = UserService.updateUser(@user, user_params)
@@ -60,11 +55,9 @@ class UsersController < ApplicationController
     end
   end
 
-  #
   # function destroy
-  #
+  # destory user
   # @return [<Type>] <description>
-  #
   def destroy
     @user = UserService.getUserByID(params[:id])
     UserService.destroyUser(@user)
@@ -74,7 +67,6 @@ class UsersController < ApplicationController
   # function :profile
   # show profile
   # @return [<Type>] <current user>
-  #
   def profile
     @user = current_user
   end
@@ -87,11 +79,9 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-  #
   # function :update_profile
   # update user profile
   # @return [<Type>] <redirect>
-  #
   def update_profile
     @user = current_user
     @is_update_profile = UserService.updateProfile(@user, user_params)
@@ -102,20 +92,16 @@ class UsersController < ApplicationController
     end
   end
 
-  #
   # function :edit_password
   # show edit password 
   # @return [<Type>] <description>
-  #
   def edit_password
      :edit_password_users_path
   end
 
-  #
   # function :change_password
   # change user password
   # @return [<Type>] <redirect>
-  #
   def change_password
     if params[:password].blank? && params[:password_confirmation].blank?
       redirect_to edit_password_users_path, notice: :PASSWORD_REQUIRE_VALIDATION
@@ -143,5 +129,4 @@ class UsersController < ApplicationController
     params.require(:user).permit(:id, :name, :email, :password, :password_confirmation, :phone,
      :address, :birthday, :super_user_flag)
   end
-
 end

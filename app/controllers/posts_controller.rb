@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
-  before_action :authorized?
-  
+  before_action :authorized? 
   def index
     @posts = PostService.getAllPosts(current_user).paginate(page: params[:page], per_page: 5)
   end
+
   # function : show
   # show post
   # param : post_id
@@ -11,6 +11,7 @@ class PostsController < ApplicationController
   def show
     @post = PostService.getPostById(params[:id])
   end
+
   # function : new
   # show create post
   # @return [<Type>] <post>
@@ -97,7 +98,6 @@ class PostsController < ApplicationController
       format.csv { send_data @posts.to_csv,:filename => "Posts-#{Date.today}.csv" }
     end
   end
-
 
   # functin upload_csv
   # show csv upload page

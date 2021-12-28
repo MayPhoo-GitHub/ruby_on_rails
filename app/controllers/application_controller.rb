@@ -19,5 +19,4 @@ class ApplicationController < ActionController::Base
     end
 
     helper_method :current_user, :logged_in?,  :can_edit
-
 end
