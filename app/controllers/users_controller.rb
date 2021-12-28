@@ -1,16 +1,17 @@
 class UsersController < ApplicationController
   before_action :authorized?
+
   def index
     @users = UserService.getAllUsers
   end
-  
+
   # function : new
   # show user create
   # @return [<Type>] <description>
   def new
     @user = User.new
   end
-  
+
   # function : new_user
   # create user
   # @return [<Type>] <user>
@@ -18,9 +19,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @is_user_create = UserService.createUser(@user)
     if @is_user_create
-      if current_user 
+      if current_user
         redirect_to users_path
-      else 
+      else
         redirect_to login_path
       end
     else
@@ -33,8 +34,8 @@ class UsersController < ApplicationController
   # @return [<Type>] <user>
   def show
     @user = UserService.getUserByID(params[:id])
-  end  
-  
+  end
+
   # function :edit
   # show edit user
   # @return [<Type>] <edit user>
@@ -93,10 +94,10 @@ class UsersController < ApplicationController
   end
 
   # function :edit_password
-  # show edit password 
+  # show edit password
   # @return [<Type>] <description>
   def edit_password
-     :edit_password_users_path
+    :edit_password_users_path
   end
 
   # function :change_password
@@ -123,10 +124,11 @@ class UsersController < ApplicationController
   end
 
   private
+
   # set user parameters
   # @return [<Type>] <description>
   def user_params
     params.require(:user).permit(:id, :name, :email, :password, :password_confirmation, :phone,
-     :address, :birthday, :super_user_flag)
+                                 :address, :birthday, :super_user_flag)
   end
 end

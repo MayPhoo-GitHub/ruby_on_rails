@@ -21,13 +21,13 @@
         <%= form.radio_button :public_flag, true  %>
         <%= form.label :public_flag, "Public", :value => "true" %>
         <%= form.radio_button :public_flag, false %>
-        <%= form.label :public_flag, "Private", :value => "false" %>     
+        <%= form.label :public_flag, "Private", :value => "false" %>
       </div>
       <% if post.errors[:public_flag].any? %>
         <div class="error-msg">This can't be blank </div>
       <% end %>
     </div>
-      <%= form.submit class: "btn-submit" %>
-      <%= link_to 'Cancel', back , class:"btn-delete" %>
+    <%= form.submit class: "btn-submit" %>
+    <%= link_to 'Cancel', back , class:"btn-delete" %>
   <% end %>
 </body>

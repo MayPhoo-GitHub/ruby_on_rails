@@ -15,7 +15,6 @@
  *= require dataTables/jquery.dataTables
  *= require_self
  */
- @import "font-awesome-sprockets";
- @import "font-awesome";
- @import 'aos/dist/aos.css'; 
- 
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "aos/dist/aos.css";

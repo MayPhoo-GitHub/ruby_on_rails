@@ -6,7 +6,7 @@ class UserRepository
     def getAllUsers
       @users = User.all.order("id ASC")
     end
-     
+
     # function :createUser
     # create user
     # @param [<Type>] user <description>
@@ -31,7 +31,7 @@ class UserRepository
     def updateUser(user, user_params)
       @is_update_user = user.update(user_params)
     end
-     
+
     # function :destroyUser
     # delete User
     # @param [<Type>] user <description>
@@ -39,7 +39,7 @@ class UserRepository
     def destroyUser(user)
       user.destroy
     end
-     
+
     # function :findByEmail
     # find user by email
     # @param [<Type>] email <description>
@@ -47,7 +47,7 @@ class UserRepository
     def findByEmail(email)
       @user = User.find_by(email: email)
     end
-     
+
     # function updateProfile
     # update profile
     # @param [<Type>] user <description>

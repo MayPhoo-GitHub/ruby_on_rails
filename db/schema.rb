@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2021_12_21_081356) do
-
   create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -37,5 +36,4 @@ ActiveRecord::Schema.define(version: 2021_12_21_081356) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
   end
-
 end

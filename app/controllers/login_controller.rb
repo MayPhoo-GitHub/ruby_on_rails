@@ -1,5 +1,5 @@
 class LoginController < ApplicationController
-  
+
   #
   # function : login
   #
@@ -22,12 +22,12 @@ class LoginController < ApplicationController
       redirect_to login_path, notice: :EMAIL_REQUIRE_VALIDATION
     elsif params[:session][:email] != nil && params[:session][:password].blank?
       redirect_to login_path, notice: :PASSWORD_REQUIRE_VALIDATION
-    else 
+    else
       user = UserService.findByEmail(params[:session][:email].downcase)
       if user && user.authenticate(params[:session][:password])
         session[:user_id] = user.id
         redirect_to posts_path
-      else 
+      else
         redirect_to login_path, notice: :INVALID_EMAIL_OR_PASSWORD
       end
     end

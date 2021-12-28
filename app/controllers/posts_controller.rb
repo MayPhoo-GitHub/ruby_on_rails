@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :authorized? 
+  before_action :authorized?
+
   def index
     @posts = PostService.getAllPosts(current_user).paginate(page: params[:page], per_page: 5)
   end
@@ -19,7 +20,7 @@ class PostsController < ApplicationController
     @post = Post.new
     # logger.info(@post)
   end
-  
+
   # function : create
   # param : post_params
   # create post
@@ -34,7 +35,7 @@ class PostsController < ApplicationController
     end
   end
 
- # function : edit
+  # function : edit
   # param : post_id
   # show edit post
   # @return [<Type>] <post>
@@ -71,10 +72,10 @@ class PostsController < ApplicationController
   # @return [<Type>] <posts>
   def search
     @search_keyword = params[:search_keyword]
-    @posts = PostService.search(@search_keyword,current_user).paginate(page: params[:page], per_page: 5)
+    @posts = PostService.search(@search_keyword, current_user).paginate(page: params[:page], per_page: 5)
     @last_search_keyword = @search_keyword
     render :index
-  end   
+  end
 
   # function filter
   # filter posts
@@ -92,10 +93,10 @@ class PostsController < ApplicationController
   # @return [<Type>] <csv>
   def download_csv
     @posts = PostService.getAllPosts(current_user)
-    @posts = @posts.reorder('id ASC')
+    @posts = @posts.reorder("id ASC")
     respond_to do |format|
       format.html
-      format.csv { send_data @posts.to_csv,:filename => "Posts-#{Date.today}.csv" }
+      format.csv { send_data @posts.to_csv, :filename => "Posts-#{Date.today}.csv" }
     end
   end
 
@@ -115,25 +116,25 @@ class PostsController < ApplicationController
     elsif !File.extname(params[:file]).eql?(".csv")
       redirect_to upload_csv_posts_path, notice: :WRONG_FILE_TYPE
     else
-      error =  PostsHelper.check_header(Constants::POST_CSV_FORMAT_HEADER,params[:file])
+      error = PostsHelper.check_header(Constants::POST_CSV_FORMAT_HEADER, params[:file])
       if error.present?
         redirect_to upload_csv_posts_path, notice: error
       else
-          file_result = Post.import(params[:file], current_user.id)
-          if (file_result == true)
-            redirect_to posts_path, notice: :FILE_UPLOADED_SUCCESSFULLY
-          else 
-            redirect_to upload_csv_posts_path, notice: file_result
-          end
+        file_result = Post.import(params[:file], current_user.id)
+        if (file_result == true)
+          redirect_to posts_path, notice: :FILE_UPLOADED_SUCCESSFULLY
+        else
+          redirect_to upload_csv_posts_path, notice: file_result
+        end
       end
     end
   end
 
   private
+
   # set post parameters
   # @return [<Type>] <description>
   def post_params
-    params.require(:post).permit(:title, :description, :public_flag,:created_user_id, :updated_user_id)
+    params.require(:post).permit(:title, :description, :public_flag, :created_user_id, :updated_user_id)
   end
 end
-

@@ -9,35 +9,34 @@
 User.destroy_all
 
 User.create!([
-    {
-        name: "Admin",
-        email: "admin@gmail.com",
-        password: "admin123",
-        phone: '09401245003',
-        address: " Yangon",
-        birthday: '1998-09-03',
-        super_user_flag: true,
-    },
-    {
-        name: "User",
-        email: "user@gmail.com",
-        password: "user1234",
-        phone: '09401245003',
-        address: " Yangon",
-        birthday: '1998-09-03',
-        super_user_flag: false,
-    },
+  {
+    name: "Admin",
+    email: "admin@gmail.com",
+    password: "admin123",
+    phone: "09401245003",
+    address: " Yangon",
+    birthday: "1998-09-03",
+    super_user_flag: true,
+  },
+  {
+    name: "User",
+    email: "user@gmail.com",
+    password: "user1234",
+    phone: "09401245003",
+    address: " Yangon",
+    birthday: "1998-09-03",
+    super_user_flag: false,
+  },
 ])
-
 
 Post.destroy_all
 Post.create!([
-    {
-        title: "Testing",
-        description: "This is test post",
-        public_flag: true,
-        created_user_id: 1,
-    },
+  {
+    title: "Testing",
+    description: "This is test post",
+    public_flag: true,
+    created_user_id: 1,
+  },
 ])
 
 p "Created #{User.count} users"

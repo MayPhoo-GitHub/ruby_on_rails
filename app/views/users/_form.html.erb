@@ -36,7 +36,7 @@
         <%= form.label :phone %><br>
         <%= form.text_field :phone,:required => false, class: "form-control" %>
         <% if user.errors[:phone].any? %>
-        <div class="error-msg">Phone <%= user.errors[:phone][0] %></div>
+          <div class="error-msg">Phone <%= user.errors[:phone][0] %></div>
         <% end %>
       </div>
       <div class="form-group">
@@ -50,25 +50,25 @@
         <%= form.label :birthday %><br>
         <%= form.date_field :birthday,:required => false, class: "form-control" %>
         <% if user.errors[:birthday].any? %>
-        <div class="error-msg">Birthday <%= user.errors[:birthday][0] %></div>
+          <div class="error-msg">Birthday <%= user.errors[:birthday][0] %></div>
         <% end %>
       </div>
       <% if current_user.super_user_flag == true %>
-      <div class="form-group">
-        <%= form.label :super_user_flag, "Create as" , class: "required" %>
-        <div class="form-group form-radio">
-          <%= form.radio_button :super_user_flag, true %>
-          <%= form.label :super_user_flag, "Admin", :value => "true" %>
-          <%= form.radio_button :super_user_flag, false %>
-          <%= form.label :super_user_flag, "User", :value => "false" %>     
+        <div class="form-group">
+          <%= form.label :super_user_flag, "Create as" , class: "required" %>
+          <div class="form-group form-radio">
+            <%= form.radio_button :super_user_flag, true %>
+            <%= form.label :super_user_flag, "Admin", :value => "true" %>
+            <%= form.radio_button :super_user_flag, false %>
+            <%= form.label :super_user_flag, "User", :value => "false" %>
+          </div>
+          <% if user.errors[:super_user_flag].any? %>
+            <div class="error-msg"> User Type can't be blank </div>
+          <% end %>
         </div>
-        <% if user.errors[:super_user_flag].any? %>
-          <div class="error-msg"> User Type can't be blank </div>
-        <% end %>
-      </div>
       <% end %>
-        <%= form.submit class: "btn-submit" %>
-        <%= link_to 'Cancel', back  %>
+      <%= form.submit class: "btn-submit" %>
+      <%= link_to 'Cancel', back  %>
     </div>
   <% end %>
 </body>
