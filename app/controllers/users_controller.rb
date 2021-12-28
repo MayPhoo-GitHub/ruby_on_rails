@@ -10,6 +10,9 @@ class UsersController < ApplicationController
   # @return [<Type>] <description>
   def new
     @user = User.new
+    if current_user.super_user_flag != true
+      redirect_to users_path
+    end
   end
 
   # function : new_user
@@ -41,6 +44,9 @@ class UsersController < ApplicationController
   # @return [<Type>] <edit user>
   def edit
     @user = UserService.getUserByID(params[:id])
+    if current_user.super_user_flag != true
+      redirect_to users_path
+    end
   end
 
   # function :update

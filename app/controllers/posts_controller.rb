@@ -41,6 +41,9 @@ class PostsController < ApplicationController
   # @return [<Type>] <post>
   def edit
     @post = PostService.getPostById(params[:id])
+    if @post.created_user_id != current_user.id && current_user.super_user_flag != true
+      redirect_to posts_path
+    end
   end
 
   # function : update
