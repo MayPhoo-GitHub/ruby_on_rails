@@ -1,5 +1,4 @@
-.button , .btn-download {
-    
+ .button , .btn-download { 
     border-radius: 10% ;
     border: none;
     color: white;
@@ -39,6 +38,7 @@
     padding:10px;
     width:70%;
     margin: 0 auto;
+    border-radius: 10px 10px 0 0;
   }
 
   .content {
@@ -47,6 +47,7 @@
     font-size: 16px;
     padding: 30px;
     margin: 0 auto;
+    border-radius: 0 0 10px 10px;
   }
 
   .wrapper {
@@ -64,4 +65,10 @@
     width: 20% ;
   }
 
+  body {
+    background-color: #556d69;
+  }
 
+  h1 , .filter {
+    color: #56d4b9;
+  }

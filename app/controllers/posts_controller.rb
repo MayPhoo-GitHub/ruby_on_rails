@@ -98,16 +98,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # function csv_format
-  # download csv format for upload
-  # @return [<Type>] <description>
-  def csv_format
-    @post = Post.new
-    respond_to do |format|
-      format.html
-      format.csv { send_data @post.csv_format,  :filename => "CSV Format.csv" }
-    end
-  end
 
   # functin upload_csv
   # show csv upload page
