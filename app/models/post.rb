@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
-  belongs_to :user, optional: true, :dependent => :destroy
-  belongs_to :created_user, class_name: "User", foreign_key: "created_user_id"
+  belongs_to :user, optional: true
+  belongs_to :created_user, class_name: "User", foreign_key: "user_id"
   validates :title, presence: true, length: { minimum: 5, maximum: 50 }
   validates :description, presence: true, length: { minimum: 10, maximum: 1000 }
   validates_inclusion_of :public_flag, :in => [true, false]
@@ -36,7 +36,7 @@ class Post < ApplicationRecord
   def self.import(file, current_user_id)
     begin
       CSV.foreach(file.path, headers: true, encoding: "iso-8859-1:utf-8", row_sep: :auto, header_converters: :symbol) do |row|
-        Post.create! row.to_hash.merge(created_user_id: current_user_id,
+        Post.create! row.to_hash.merge(user_id: current_user_id,
                                        updated_user_id: current_user_id, created_at: Time.now, updated_at: Time.now)
       end
       return true

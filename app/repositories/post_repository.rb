@@ -10,7 +10,7 @@ class PostRepository
       if current_user.super_user_flag == true
         @posts = Post.all.order("created_at DESC")
       else
-        @posts = Post.where(public_flag: true).or (Post.where(created_user_id: current_user.id))
+        @posts = Post.where(public_flag: true).or (Post.where(user_id: current_user.id))
         @posts.order("created_at DESC")
       end
     end
@@ -52,7 +52,7 @@ class PostRepository
     # @return [<Type>] <posts>
 
     def filter(user_id)
-      @posts = Post.where(created_user_id: user_id).order("created_at DESC")
+      @posts = Post.where(user_id: user_id).order("created_at DESC")
     end
 
     # function search

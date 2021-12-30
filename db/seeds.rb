@@ -29,15 +29,6 @@ User.create!([
   },
 ])
 
-Post.destroy_all
-Post.create!([
-  {
-    title: "Testing",
-    description: "This is test post",
-    public_flag: true,
-    created_user_id: 1,
-  },
-])
 
 p "Created #{User.count} users"
-p "Created #{Post.count} posts"
+

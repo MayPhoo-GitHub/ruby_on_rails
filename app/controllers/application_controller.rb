@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def can_edit(post)
-    return current_user.super_user_flag || (post.created_user_id == current_user.id)
+    return current_user.super_user_flag || (post.user_id == current_user.id)
   end
 
   helper_method :current_user, :logged_in?, :can_edit

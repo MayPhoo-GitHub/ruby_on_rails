@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   # create post
   # @return redirect
   def new_post
-    params[:post][:created_user_id] ||= current_user.id
+    params[:post][:user_id] ||= current_user.id
     @post = Post.new(post_params)
     @is_save_post = PostService.createPost(@post)
     if @is_save_post
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
   # @return [<Type>] <post>
   def edit
     @post = PostService.getPostById(params[:id])
-    if @post.created_user_id != current_user.id && current_user.super_user_flag != true
+    if @post.user_id != current_user.id && current_user.super_user_flag != true
       redirect_to posts_path
     end
   end
@@ -97,6 +97,7 @@ class PostsController < ApplicationController
   # @return [<Type>] <csv>
   def download_csv
     @posts = PostService.getAllPosts(current_user)
+    @posts = @posts.joins(:user)
     @posts = @posts.reorder("id ASC")
 
     respond_to do |format|
@@ -151,6 +152,6 @@ class PostsController < ApplicationController
   # set post parameters
   # @return [<Type>] <description>
   def post_params
-    params.require(:post).permit(:title, :description, :public_flag, :created_user_id, :updated_user_id)
+    params.require(:post).permit(:title, :description, :public_flag, :user_id, :updated_user_id)
   end
 end
