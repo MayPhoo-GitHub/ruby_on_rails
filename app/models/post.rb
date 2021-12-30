@@ -1,19 +1,21 @@
 class Post < ApplicationRecord
-  belongs_to :user, optional: true, :dependent => :destroy
-  belongs_to :created_user, class_name: "User", foreign_key: "created_user_id"
+  belongs_to :user, :foreign_key => :created_user_id, :primary_key => :id, optional: true, :dependent => :destroy
   validates :title, presence: true, length: { minimum: 5, maximum: 50 }
   validates :description, presence: true, length: { minimum: 10, maximum: 1000 }
   validates_inclusion_of :public_flag, :in => [true, false]
 
+  require "csv"
   # function :to_csv
   # export post list csv
   # @return [<Type>] <cvs>
+
   def self.to_csv
     headers = Constants::POST_CSV_HEADER
+    attributes = %w{id title description public_flag name}
     CSV.generate(headers: true) do |csv|
       csv << headers
       all.each do |post|
-        csv << headers.map { |attr| post.send(attr) }
+        csv << post.attributes.merge(post.user.attributes).values_at(*attributes)
       end
     end
   end
@@ -43,5 +45,9 @@ class Post < ApplicationRecord
     rescue => exception
       return exception
     end
+  end
+
+  def name
+    self.name
   end
 end

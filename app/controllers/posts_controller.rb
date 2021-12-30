@@ -11,6 +11,7 @@ class PostsController < ApplicationController
   # @return [<Type>] <post>
   def show
     @post = PostService.getPostById(params[:id])
+    @posts = @posts.joins(:user)
   end
 
   # function : new
@@ -98,7 +99,7 @@ class PostsController < ApplicationController
   def download_csv
     @posts = PostService.getAllPosts(current_user)
     @posts = @posts.reorder("id ASC")
-
+    @posts = @posts.joins (:user)
     respond_to do |format|
       format.html
       format.csv { send_data @posts.to_csv, :filename => "Posts-#{Date.today}.csv" }

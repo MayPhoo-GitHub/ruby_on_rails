@@ -51,7 +51,7 @@
             &nbsp; <i class="fa fa-lock" style="font-size:24px;"></i>
           <% end %>
           <p style="font-size:12px"> <i class="fa fa-calendar"></i>
-            <%= post.created_at.strftime("%Y/%m/%d " )%> [Posted By: <%= post.created_user.name %>]  </p>
+            <%= post.created_at.strftime("%Y/%m/%d " )%> [Posted By: <%= post.user.name %>]  </p>
         </h2>
         <div class="content"><%= truncate(post.description.html_safe, length:50)%><br>
           <%= link_to "Show More >>", post_path(post), class: "show-more" %>

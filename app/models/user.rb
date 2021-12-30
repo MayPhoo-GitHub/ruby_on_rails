@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :posts, dependent: :destroy
+  has_many :posts, :foreign_key => :created_user_id, :primary_key => :id, :dependent => :delete_all
 
   before_save :email_downcase
   validates :name, presence: true, length: { maximum: 100 }
