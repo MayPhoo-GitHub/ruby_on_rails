@@ -27,8 +27,9 @@ class PostsController < ApplicationController
   # @return redirect
   def new_post
     params[:post][:created_user_id] ||= current_user.id
-    @post = Post.create(post_params)
-    if @post.save
+    @post = Post.new(post_params)
+    @is_save_post = PostService.createPost(@post)
+    if @is_save_post
       redirect_to posts_path
     else
       render :new
@@ -97,6 +98,7 @@ class PostsController < ApplicationController
   def download_csv
     @posts = PostService.getAllPosts(current_user)
     @posts = @posts.reorder("id ASC")
+
     respond_to do |format|
       format.html
       format.csv { send_data @posts.to_csv, :filename => "Posts-#{Date.today}.csv" }
@@ -107,7 +109,7 @@ class PostsController < ApplicationController
   # show csv upload page
   # @return [<Type>] <description>
   def upload_csv
-    :csv_format_posts_path
+    :upload_csv_posts_path
   end
 
   # function import_csv
@@ -130,6 +132,17 @@ class PostsController < ApplicationController
           redirect_to upload_csv_posts_path, notice: file_result
         end
       end
+    end
+  end
+
+  # function csv_format
+  # download csv format for upload
+  # @return [<Type>] <description>
+  def csv_format
+    @post = Post.new
+    respond_to do |format|
+      format.html
+      format.csv { send_data @post.csv_format, :filename => "CSV Format.csv" }
     end
   end
 

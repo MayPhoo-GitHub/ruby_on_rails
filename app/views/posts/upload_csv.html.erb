@@ -11,6 +11,7 @@
         <div class="error-msg"> <%= notice %> </div>
       <% end %>
       <%= submit_tag "Upload", class: 'btn-submit' %>
+      <%= link_to "Download CSV Format".html_safe, csv_format_posts_path(format: :csv), class: "btn-alert" %>
     <% end %>
   </div>
 </body>

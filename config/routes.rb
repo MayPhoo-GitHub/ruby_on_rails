@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root 'login#login'
- # posts
+  root "login#login"
+  # posts
   resources :posts do
     collection do
       get :new_post, to: "posts#new"
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get :csv_format
       get :upload_csv
       post :import_csv
+      get :csv_format
     end
     member do
       get :edit
@@ -18,10 +19,9 @@ Rails.application.routes.draw do
     end
   end
 
- # users
+  # users
   resources :users do
     collection do
-
       get :new_user, to: "users#new"
       post :new_user
       get :profile
@@ -32,21 +32,18 @@ Rails.application.routes.draw do
     end
     member do
       get :edit
-      put :edit, to: 'users#update'
+      put :edit, to: "users#update"
     end
   end
 
-
   # login
-  get '/login', to: 'login#login'
-  post '/login', to: 'login#actionLogin'
-  get '/logout', to: 'login#logout'
+  get "/login", to: "login#login"
+  post "/login", to: "login#actionLogin"
+  get "/logout", to: "login#logout"
 
-  get '/password/reset', to: 'password_resets#new'
-  post '/password/reset', to: 'password_resets#create'
-  get '/password/reset/edit', to: 'password_resets#edit'
-  patch '/password/reset/edit', to: 'password_resets#update'
+  get "/password/reset", to: "password_resets#new"
+  post "/password/reset", to: "password_resets#create"
+  get "/password/reset/edit", to: "password_resets#edit"
+  patch "/password/reset/edit", to: "password_resets#update"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
-
-

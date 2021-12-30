@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :phone
       t.string :address
       t.date :birthday
-      t.boolean :super_user_flag
+      t.boolean :super_user_flag, null: false
       t.timestamps
       t.datetime :deleted_at
     end

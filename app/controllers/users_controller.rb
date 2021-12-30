@@ -37,6 +37,7 @@ class UsersController < ApplicationController
   # @return [<Type>] <user>
   def show
     @user = UserService.getUserByID(params[:id])
+    @posts = PostService.filter(@user).paginate(page: params[:page], per_page: 5)
   end
 
   # function :edit

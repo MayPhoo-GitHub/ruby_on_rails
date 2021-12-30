@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag "post.css" %>
 <body>
-  <div class="container">
+  <div class="container" style="width:70%">
     <h2>User Detail</h2>
     <div class="card-body">
       <div class="form-group row">
@@ -55,4 +55,32 @@
       <% end %>
     </div>
   </div>
+  <br>
+  <h1 style= "text-align: center">Created Posts</h1>
+  <% if  @posts.empty?  %>
+    <p style= "text-align:center"> No Post to show.</p>
+  <% else %>
+    <% @posts.each do |post| %>
+      <div data-aos="fade-up">
+        <h2 class="header"><%= post.title %>
+          <% if post.public_flag == true %>&nbsp;<i class="fa fa-globe" style="font-size:24px;"></i>
+          <% else %>
+            &nbsp; <i class="fa fa-lock" style="font-size:24px;"></i>
+          <% end %>
+          <p style="font-size:12px"> <i class="fa fa-calendar"></i>
+            <%= post.created_at.strftime("%Y/%m/%d " )%> [Posted By: <%= post.created_user.name %>]  </p>
+        </h2>
+        <div class="content"><%= truncate(post.description.html_safe, length:50)%><br>
+          <%= link_to "Show More >>", post_path(post), class: "show-more" %>
+        </div>
+      </div>
+      <br>
+    <% end %>
+  <% end %>
+  <div class="wrapper">
+    <%= will_paginate @posts, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+  </div>
 </body>
+<script>
+  AOS.init();
+</script>

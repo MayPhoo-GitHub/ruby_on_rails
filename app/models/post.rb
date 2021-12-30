@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  belongs_to :user, optional: true, :dependent => :destroy
+  belongs_to :created_user, class_name: "User", foreign_key: "created_user_id"
   validates :title, presence: true, length: { minimum: 5, maximum: 50 }
   validates :description, presence: true, length: { minimum: 10, maximum: 1000 }
   validates_inclusion_of :public_flag, :in => [true, false]
@@ -13,6 +15,16 @@ class Post < ApplicationRecord
       all.each do |post|
         csv << headers.map { |attr| post.send(attr) }
       end
+    end
+  end
+
+  # function csv_format
+  # export csv format for post csv upload
+  # @return [<Type>] <csv>
+  def csv_format
+    headers = Constants::POST_CSV_FORMAT_HEADER
+    CSV.generate(headers: true) do |csv|
+      csv << headers
     end
   end
 
