@@ -15,7 +15,7 @@ class Post < ApplicationRecord
     CSV.generate(headers: true) do |csv|
       csv << headers
       all.each do |post|
-        csv << post.attributes.merge(post.user.attributes).values_at(*attributes)
+        csv << [post.id,post.title,post.description,post.public_flag,post.user.name]
       end
     end
   end
